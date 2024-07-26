@@ -1,0 +1,145 @@
+{
+  "interactionModel": {
+    "languageModel": {
+      "intents": [
+        {
+          "name": "AMAZON.CancelIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.HelpIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.StopIntent",
+          "samples": []
+        },
+        {
+          "slots": [],
+          "name": "HelloWorldIntent",
+          "samples": [
+            "hello",
+            "how are you",
+            "say hi world",
+            "say hi",
+            "hi",
+            "say hello world",
+            "say hello"
+          ]
+        },
+        {
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.FallbackIntent",
+          "samples": []
+        },
+        {
+          "slots": [
+            {
+              "name": "uname",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "RegisterME",
+          "samples": [
+            "i {uname}",
+            "me {uname}",
+            "hi im {uname}",
+            "my name is {uname}",
+            "i\u0027m {uname}",
+            "call me {uname}",
+            "hey there I\u0027m {uname}",
+            "it\u0027s {uname}",
+            "I go by {uname}",
+            "you can call me {uname}",
+            "they call me {uname}",
+            "introducing myself as {uname}",
+            "folks call me {uname}",
+            "nice to meet you I\u0027m {uname}",
+            "I am known as {uname}",
+            "I respond to {uname}",
+            "I am called {uname}",
+            "my friends call me {uname}",
+            "known as {uname}",
+            "greetings I\u0027m {uname}",
+            "pleased to meet you I\u0027m {uname}",
+            "hi there {uname} here",
+            "just call me {uname}",
+            "everyone calls me {uname}",
+            "{uname} is my name",
+            "my full name is {uname}",
+            "people know me as {uname}",
+            "some call me {uname}",
+            "in case you were wondering I\u0027m {uname}",
+            "my nickname is {uname}",
+            "formally I\u0027m {uname}",
+            "{uname} is how you can address me",
+            "to you I am {uname}",
+            "I introduce myself as {uname}",
+            "hi the name\u0027s {uname}",
+            "I\u0027m usually called {uname}",
+            "known to many as {uname}",
+            "hello I\u0027m {uname}",
+            "allow me to introduce myself I\u0027m {uname}",
+            "my designation is {uname}",
+            "on the record I\u0027m {uname}"
+          ]
+        },
+        {
+          "slots": [
+            {
+              "name": "amount",
+              "type": "AMAZON.NUMBER"
+            },
+            {
+              "name": "someone",
+              "type": "AMAZON.Person"
+            }
+          ],
+          "name": "PayToAccount",
+          "samples": [
+            "money transfer",
+            "send money",
+            "i want to transer money",
+            "{amount} to {someone}",
+            "pay {amount} to {someone}",
+            "transfer {amount} to {someone}",
+            "send {amount} to {someone}",
+            "pay to {amount} to {someone}"
+          ]
+        },
+        {
+          "slots": [],
+          "name": "ReadNotifications",
+          "samples": [
+            "my notifications",
+            "notifications",
+            "read",
+            "read notifications",
+            "narrate",
+            "expences",
+            "tell expences one by one.",
+            "narrate expenses"
+          ]
+        },
+        {
+          "name": "AMAZON.YesIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.NoIntent",
+          "samples": []
+        }
+      ],
+      "types": [],
+      "invocationName": "invoke gmc finsight navin",
+      "modelConfiguration": {
+        "fallbackIntentSensitivity": {
+          "level": "HIGH"
+        }
+      }
+    }
+  }
+}
