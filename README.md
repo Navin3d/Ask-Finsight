@@ -27,7 +27,7 @@ public class FolderComparison {
         findAndPrintMismatches(csvFileParts, excelFileParts);
     }
 
-    rivate static Set<String> getExcelFileParts(String folderPath) {
+    private static Set<String> getExcelFileParts(String folderPath) {
         Set<String> fileParts = new HashSet<>();
         File folder = new File(folderPath);
         File[] files = folder.listFiles((dir, name) -> name.endsWith(".xls") || name.endsWith(".xlsx"));
@@ -47,11 +47,18 @@ public class FolderComparison {
 
     private static String extractRelevantPartFromExcel(String fileName) {
         String baseName = fileName.replace(".xls", "").replace(".xlsx", "");
-        int lastSeparatorIndex = Math.max(baseName.lastIndexOf('-'), baseName.lastIndexOf('_'));
-        if (lastSeparatorIndex != -1) {
-            String version = baseName.substring(lastSeparatorIndex + 1);
-            String sourceSystems = baseName.substring(0, lastSeparatorIndex).replaceFirst("^Rules-Template-", "");
-            return (sourceSystems + "_" + version).toLowerCase();
+        String[] parts = baseName.split("[-_]");
+        if (parts.length >= 4) {
+            // Join parts from the second part to the last part with an underscore
+            StringBuilder relevantPartBuilder = new StringBuilder();
+            for (int i = 2; i < parts.length; i++) {
+                if (i > 2) {
+                    relevantPartBuilder.append("_");
+                }
+                relevantPartBuilder.append(parts[i]);
+            }
+            String relevantPart = relevantPartBuilder.toString().toLowerCase();
+            return relevantPart;
         }
         return null;
     }
@@ -78,7 +85,9 @@ public class FolderComparison {
         String baseName = fileName.replace(".csv", "");
         String[] parts = baseName.split("_");
         if (parts.length >= 4) {
-            return (parts[0] + "_" + parts[1] + "_" + parts[3]).toLowerCase();
+            // Join the first two parts and the last part with an underscore
+            String relevantPart = (parts[0] + "_" + parts[1] + "_" + parts[3]).toLowerCase();
+            return relevantPart;
         }
         return null;
     }
