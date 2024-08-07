@@ -45,7 +45,8 @@ public class FolderComparison {
                         }
                         relevantPartBuilder.append(parts[i]);
                     }
-                    relevantPartBuilder.append("_").append(parts[parts.length - 1].replace(".xls", "").replace(".xlsx", ""));
+                    String version = parts[parts.length - 1].replace(".xls", "").replace(".xlsx", "");
+                    relevantPartBuilder.append("_").append(version);
                     String relevantPart = relevantPartBuilder.toString().toLowerCase();
                     fileParts.add(relevantPart);
                 }
@@ -81,6 +82,4 @@ public class FolderComparison {
             }
         }
     }
-}
-
 ```
