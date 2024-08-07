@@ -27,7 +27,7 @@ public class FolderComparison {
         findAndPrintMismatches(csvFileParts, excelFileParts);
     }
 
-    private static Set<String> getExcelFileParts(String folderPath) {
+    rivate static Set<String> getExcelFileParts(String folderPath) {
         Set<String> fileParts = new HashSet<>();
         File folder = new File(folderPath);
         File[] files = folder.listFiles((dir, name) -> name.endsWith(".xls") || name.endsWith(".xlsx"));
@@ -35,25 +35,25 @@ public class FolderComparison {
         if (files != null) {
             for (File file : files) {
                 String name = file.getName();
-                String[] parts = name.split("-");
-                if (parts.length >= 4) {
-                    // Join parts from index 2 to the second last part with underscore
-                    StringBuilder relevantPartBuilder = new StringBuilder();
-                    for (int i = 2; i < parts.length - 1; i++) {
-                        if (i > 2) {
-                            relevantPartBuilder.append("_");
-                        }
-                        relevantPartBuilder.append(parts[i]);
-                    }
-                    String version = parts[parts.length - 1].replace(".xls", "").replace(".xlsx", "");
-                    relevantPartBuilder.append("_").append(version);
-                    String relevantPart = relevantPartBuilder.toString().toLowerCase();
+                String relevantPart = extractRelevantPartFromExcel(name);
+                if (relevantPart != null) {
                     fileParts.add(relevantPart);
                 }
             }
         }
 
         return fileParts;
+    }
+
+    private static String extractRelevantPartFromExcel(String fileName) {
+        String baseName = fileName.replace(".xls", "").replace(".xlsx", "");
+        int lastSeparatorIndex = Math.max(baseName.lastIndexOf('-'), baseName.lastIndexOf('_'));
+        if (lastSeparatorIndex != -1) {
+            String version = baseName.substring(lastSeparatorIndex + 1);
+            String sourceSystems = baseName.substring(0, lastSeparatorIndex).replaceFirst("^Rules-Template-", "");
+            return (sourceSystems + "_" + version).toLowerCase();
+        }
+        return null;
     }
 
     private static Set<String> getCsvFileParts(String folderPath) {
@@ -64,15 +64,23 @@ public class FolderComparison {
         if (files != null) {
             for (File file : files) {
                 String name = file.getName();
-                String[] parts = name.split("_");
-                if (parts.length >= 4) {
-                    String relevantPart = (parts[0] + "_" + parts[1] + "_" + parts[3].replace(".csv", "")).toLowerCase();
+                String relevantPart = extractRelevantPartFromCsv(name);
+                if (relevantPart != null) {
                     fileParts.add(relevantPart);
                 }
             }
         }
 
         return fileParts;
+    }
+
+    private static String extractRelevantPartFromCsv(String fileName) {
+        String baseName = fileName.replace(".csv", "");
+        String[] parts = baseName.split("_");
+        if (parts.length >= 4) {
+            return (parts[0] + "_" + parts[1] + "_" + parts[3]).toLowerCase();
+        }
+        return null;
     }
 
     private static void findAndPrintMismatches(Set<String> csvFileParts, Set<String> excelFileParts) {
