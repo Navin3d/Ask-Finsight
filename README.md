@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
-public class RulesChecker {
+public class FolderComparison {
 
     public static void main(String[] args) {
         // Define the paths to the two folders
@@ -37,7 +37,16 @@ public class RulesChecker {
                 String name = file.getName();
                 String[] parts = name.split("-");
                 if (parts.length >= 4) {
-                    String relevantPart = (parts[2] + "_" + parts[3] + "_" + parts[4].replace(".xls", "").replace(".xlsx", "")).toLowerCase();
+                    // Join parts from index 2 to the second last part with underscore
+                    StringBuilder relevantPartBuilder = new StringBuilder();
+                    for (int i = 2; i < parts.length - 1; i++) {
+                        if (i > 2) {
+                            relevantPartBuilder.append("_");
+                        }
+                        relevantPartBuilder.append(parts[i]);
+                    }
+                    relevantPartBuilder.append("_").append(parts[parts.length - 1].replace(".xls", "").replace(".xlsx", ""));
+                    String relevantPart = relevantPartBuilder.toString().toLowerCase();
                     fileParts.add(relevantPart);
                 }
             }
