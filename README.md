@@ -13,29 +13,45 @@ mvn %*
   - mvn release:perform
 ```
 ```bash
-Title:
-Migrate Project from Ant to Maven
-
 Description:
-We need to migrate the current build system for the project from Ant to Maven. The migration will allow us to leverage Maven's dependency management, standardized project structure, and build lifecycle. This migration is crucial for improving our build process, simplifying dependency management, and aligning with best practices.
+As part of our strategic initiative, we are moving towards adopting GitLab as our primary CI/CD platform. TeamCity, currently in use, is planned to be decommissioned. This migration will consolidate our CI/CD processes within GitLab, enhancing automation, improving pipeline visibility, and reducing maintenance overhead associated with managing multiple CI/CD tools.
 
 Background:
-The project is currently using Ant as its build tool. While Ant provides flexibility, it lacks some of the more modern features that Maven offers, such as transitive dependency management and a standardized project structure. The migration to Maven will help us streamline our build processes and ensure better consistency across projects.
+TeamCity has been our primary CI/CD tool, handling builds, tests, and releases. However, with the broader adoption of GitLab for source control and its robust CI/CD capabilities, it is imperative to transition fully to GitLab. This will not only streamline our workflows but also centralize our CI/CD efforts in a single platform, ensuring better integration, ease of use, and future scalability. As a result, TeamCity will be phased out.
 
 Tasks:
 
-Analyze the current Ant build scripts to understand the build process and dependencies.
-Set up a basic Maven structure for the project.
-Migrate all build tasks from Ant to the Maven build lifecycle (e.g., compilation, testing, packaging).
-Configure Maven to handle all dependencies, including any custom or third-party libraries.
-Update any CI/CD pipelines or build scripts to use Maven instead of Ant.
-Test the Maven build to ensure it replicates the Ant build process accurately.
-Document the migration process and update any relevant documentation.
+Assessment & Planning:
+
+Review existing CI/CD pipelines and processes in TeamCity.
+Identify critical pipelines, dependencies, and custom scripts.
+Plan the migration timeline, ensuring minimal disruption to ongoing projects.
+Pipeline Migration:
+
+Create equivalent pipelines in GitLab CI/CD for building, testing, and releasing artifacts.
+Ensure all custom scripts and configurations are adapted for GitLab CI/CD.
+Configure GitLab runners and ensure they have necessary access and resources.
+Testing & Validation:
+
+Perform comprehensive testing of the new GitLab CI/CD pipelines to ensure they replicate TeamCity's functionality.
+Validate that release tags and artifacts are correctly managed and deployed into Artifactory.
+Gather feedback from development teams on the new pipelines and make necessary adjustments.
+Decommissioning TeamCity:
+
+Gradually phase out TeamCity pipelines as their GitLab counterparts go live.
+Ensure all historical data and configurations from TeamCity are archived or migrated, as necessary.
+Officially decommission TeamCity after successful migration of all pipelines.
+Documentation & Training:
+
+Update documentation to reflect the migration and new CI/CD processes.
+Provide training sessions or materials for teams on using GitLab CI/CD.
+Communicate the migration plan and timelines to all stakeholders.
 Acceptance Criteria:
 
-The project builds successfully using Maven without errors.
-All dependencies are correctly managed by Maven.
-The Maven build replicates the functionality of the previous Ant build, including any custom build tasks.
-The CI/CD pipeline is updated and runs successfully using Maven.
-Documentation is updated to reflect the changes in the build process.
+All existing CI/CD pipelines are successfully migrated to GitLab CI/CD.
+GitLab pipelines fully replicate the functionality and reliability of TeamCity.
+Release tags and artifacts are correctly managed and deployed using GitLab CI/CD.
+TeamCity is fully decommissioned without impact on active projects.
+Documentation is updated, and teams are trained on the new CI/CD platform.
+
 ```
