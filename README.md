@@ -13,20 +13,29 @@ mvn %*
   - mvn release:perform
 ```
 ```bash
-SELECT t1.*
-FROM table1 t1
-LEFT JOIN table2 t2 ON t1.id = t2.id  -- Replace 'id' with the primary key or unique columns
-WHERE t2.id IS NULL;
+Title:
+Migrate Project from Ant to Maven
 
-SELECT * FROM table1
-MINUS
-SELECT * FROM table2;
+Description:
+We need to migrate the current build system for the project from Ant to Maven. The migration will allow us to leverage Maven's dependency management, standardized project structure, and build lifecycle. This migration is crucial for improving our build process, simplifying dependency management, and aligning with best practices.
 
-SELECT COALESCE(t1.id, t2.id) AS id,
-       t1.column1 AS table1_column1,
-       t2.column1 AS table2_column1,
-       -- add more columns as needed
-FROM table1 t1
-FULL OUTER JOIN table2 t2 ON t1.id = t2.id  -- Replace 'id' with the primary key or unique columns
-WHERE t1.id IS NULL OR t2.id IS NULL;
+Background:
+The project is currently using Ant as its build tool. While Ant provides flexibility, it lacks some of the more modern features that Maven offers, such as transitive dependency management and a standardized project structure. The migration to Maven will help us streamline our build processes and ensure better consistency across projects.
+
+Tasks:
+
+Analyze the current Ant build scripts to understand the build process and dependencies.
+Set up a basic Maven structure for the project.
+Migrate all build tasks from Ant to the Maven build lifecycle (e.g., compilation, testing, packaging).
+Configure Maven to handle all dependencies, including any custom or third-party libraries.
+Update any CI/CD pipelines or build scripts to use Maven instead of Ant.
+Test the Maven build to ensure it replicates the Ant build process accurately.
+Document the migration process and update any relevant documentation.
+Acceptance Criteria:
+
+The project builds successfully using Maven without errors.
+All dependencies are correctly managed by Maven.
+The Maven build replicates the functionality of the previous Ant build, including any custom build tasks.
+The CI/CD pipeline is updated and runs successfully using Maven.
+Documentation is updated to reflect the changes in the build process.
 ```
